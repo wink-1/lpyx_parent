@@ -1,0 +1,7 @@
+# 项目排除路径
+/lpyx-common/common-service/target/
+/lpyx-common/common-util/target/
+/lpyx-manager/target/
+/lpyx-model/target/
+/logs
+/.idea

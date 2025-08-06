@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wink.lpyx.manager.mapper.product.ProductSpecMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.wink.lpyx.model.entity.product.ProductSpec">
+        <result column="spec_name" property="specName"/>
+        <result column="spec_value" property="specValue"/>
+    </resultMap>
+
+
+    <!-- 用于select查询公用抽取的列 -->
+    <sql id="columns">
+        id, spec_name,spec_value,create_time,update_time,is_deleted
+    </sql>
+
+    <update id="updateById">
+        update product_spec
+        set
+        <if test="specName != null and specName != ''">
+            spec_name = #{specName},
+        </if>
+        <if test="specValue != null and specValue != ''">
+            spec_value = #{specValue},
+        </if>
+        update_time = now()
+        where id = #{id}
+    </update>
+
+    <select id="findByPage" resultMap="BaseResultMap">
+        select
+        <include refid="columns"/>
+        from product_spec
+        where is_deleted = 0
+    </select>
+    <select id="findAll" resultMap="BaseResultMap">
+        select *
+        from product_spec
+        where is_deleted = 0
+    </select>
+
+
+</mapper>
